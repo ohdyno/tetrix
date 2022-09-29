@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App board={{rows: 20, columns: 10}}/>
   </React.StrictMode>,
   document.getElementById('root')
 );

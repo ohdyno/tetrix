@@ -1,0 +1,15 @@
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.row {
+    display: flex;
+}
+
+.row .cell {
+    margin: 2px;
+    border: solid thin;
+    width: 20px;
+    height: 20px;
+}
