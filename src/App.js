@@ -5,9 +5,9 @@ function Board({board: {rows, columns}}) {
     return (
         <div id={"board"}>
             {_.times(rows, (row) =>
-                <div data-testid={"row"} key={`row:${row}`}>
+                <div key={`row:${row}`}>
                     {_.times(columns, (column) =>
-                        <div data-testid={"cell"} key={`cell:${row},${column}`}/>)
+                        <div role={"cell"} key={`cell:${row},${column}`}/>)
                     }
                 </div>)
             }
