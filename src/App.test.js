@@ -1,10 +1,14 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders an empty board with specified rows and columns', () => {
+test('renders an empty 1x1 board', () => {
   render(<App board={{rows: 1, columns: 1}}/>);
-  const rows = screen.getAllByTestId(/row/i);
-  expect(rows.length).toEqual(1);
-  const columns = screen.getAllByTestId(/column/i);
-  expect(columns.length).toEqual(1);
+  const cells = screen.getAllByTestId(/cell/i);
+  expect(cells.length).toEqual(1);
+});
+
+test('renders an empty 3x3 board', () => {
+  render(<App board={{rows: 3, columns: 3}}/>);
+  const cells = screen.getAllByTestId(/cell/i);
+  expect(cells.length).toEqual(9);
 });
