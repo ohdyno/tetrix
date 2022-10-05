@@ -13,3 +13,7 @@ body {
     width: 20px;
     height: 20px;
 }
+
+.cell.filled {
+    background-color: blueviolet;
+}

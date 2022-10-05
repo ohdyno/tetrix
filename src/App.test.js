@@ -22,3 +22,21 @@ describe('rendering the board', function () {
         expect(cells.length).toEqual(9);
     });
 });
+
+
+describe('rendering pieces', function () {
+    it('renders a horizontal line piece at the top of the board', () => {
+        const piece = {
+            type: "line",
+            rotation: 90,
+            coordinate: {
+                row: 0,
+                column: 0
+            }
+
+        };
+        render(<App board={{rows: 4, columns: 4}} pieces={[piece]}/>);
+        const cells = screen.getAllByRole(/filled-cell/i);
+        expect(cells.length).toEqual(4);
+    });
+});
