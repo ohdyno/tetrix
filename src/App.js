@@ -18,6 +18,7 @@ function Board({board: {rows, columns}}) {
 function App({board}) {
     return (
         <div className="App">
+            <h1>Tetrix</h1>
             <Board board={board}/>
         </div>
     );
