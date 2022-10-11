@@ -14,8 +14,8 @@ function isFilledForPiece(piece, row, column) {
     return _.some(allCoordinates, coordinate => coordinate.row === row && coordinate.column === column)
 }
 
-function isFilled(pieces, row, column) {
-    return _.has(pieces, `${row}.${column}`)
+function getPieceTypeAt(pieces, row, column) {
+    return _.get(pieces, `${row}.${column}`)
 }
 
 function Board({board: {rows, columns}, pieces}) {
@@ -24,8 +24,9 @@ function Board({board: {rows, columns}, pieces}) {
             {_.times(rows, (row) =>
                 <div className={"row"} key={`row:${row}`}>
                     {_.times(columns, (column) => {
-                        if (isFilled(pieces, row, column)) {
-                            return <div className={"cell filled"} role={"filled-cell"} key={`cell:${row},${column}`} data-row={row} data-column={column}/>
+                        const type = getPieceTypeAt(pieces, row, column);
+                        if (type) {
+                            return <div className={"cell filled"} role={"filled-cell"} key={`cell:${row},${column}`} data-row={row} data-column={column} data-piece-type={type}/>
                         }
                         return <div className={"cell"} role={"cell"} key={`cell:${row},${column}`} data-row={row} data-column={column}/>;
                     })}

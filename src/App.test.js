@@ -47,4 +47,19 @@ describe('rendering pieces', function () {
         expect(containsCell(cells, "0", "2")).toBeTruthy()
         expect(containsCell(cells, "0", "3")).toBeTruthy()
     });
+
+    it('renders filled cells with correct type', () => {
+        const pieces = {
+            0: {
+                0: "line",
+                1: "line",
+                2: "line",
+                3: "line"
+            }
+        };
+        render(<App board={{rows: 4, columns: 4}} pieces={pieces}/>);
+        const cells = screen.getAllByRole(/filled-cell/i);
+        expect(cells.length).toEqual(4);
+        expect(_.every(cells, (cell => cell.dataset.pieceType === "line"))).toBeTruthy()
+    });
 });
