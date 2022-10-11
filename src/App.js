@@ -2,16 +2,17 @@ import './App.css';
 import _ from "lodash";
 
 function calculateAllCoordinates(piece) {
-    return [{row: 0, column: 0}, {row: 0, column: 1}, {row: 0, column: 2}, {row: 0, column: 3}]
+    const {row, column} = piece.coordinate;
+    return _.times(4, (increment) => ({row, column: column + increment}))
 }
 
 function isFilledForPiece(piece, row, column) {
     const allCoordinates = calculateAllCoordinates(piece);
-    return allCoordinates.some(coordinate => coordinate.row === row && coordinate.column === column)
+    return _.some(allCoordinates, coordinate => coordinate.row === row && coordinate.column === column)
 }
 
 function isFilled(pieces, row, column) {
-    return pieces.some(piece => isFilledForPiece(piece, row, column))
+    return _.some(pieces,piece => isFilledForPiece(piece, row, column))
 }
 
 function Board({board: {rows, columns}, pieces}) {
