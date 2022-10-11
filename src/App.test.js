@@ -1,5 +1,6 @@
 import {render, screen} from '@testing-library/react';
 import App from './App';
+import _ from "lodash";
 
 describe('static application elements', function () {
     it('has the name "Tetrix"', () => {
@@ -24,6 +25,10 @@ describe('rendering the board', function () {
 });
 
 
+function containsCell(cells, row, column) {
+    return _.some(cells, (cell => cell.dataset.row === row && cell.dataset.column === column));
+}
+
 describe('rendering pieces', function () {
     it('renders a horizontal line piece at the top of the board', () => {
         const piece = {
@@ -37,6 +42,27 @@ describe('rendering pieces', function () {
         };
         render(<App board={{rows: 4, columns: 4}} pieces={[piece]}/>);
         const cells = screen.getAllByRole(/filled-cell/i);
-        expect(cells.length).toEqual(4);
+        expect(containsCell(cells, `0`, "0")).toBeTruthy()
+        expect(containsCell(cells, "0", "1")).toBeTruthy()
+        expect(containsCell(cells, "0", "2")).toBeTruthy()
+        expect(containsCell(cells, "0", "3")).toBeTruthy()
+    });
+
+    it('renders a vertical line piece at the top of the board', () => {
+        const piece = {
+            type: "line",
+            rotation: 0,
+            coordinate: {
+                row: 0,
+                column: 0
+            }
+
+        };
+        render(<App board={{rows: 4, columns: 4}} pieces={[piece]}/>);
+        const cells = screen.getAllByRole(/filled-cell/i);
+        expect(containsCell(cells, "0", "0")).toBeTruthy()
+        expect(containsCell(cells, "1", "0")).toBeTruthy()
+        expect(containsCell(cells, "2", "0")).toBeTruthy()
+        expect(containsCell(cells, "3", "0")).toBeTruthy()
     });
 });

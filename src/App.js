@@ -3,7 +3,10 @@ import _ from "lodash";
 
 function calculateAllCoordinates(piece) {
     const {row, column} = piece.coordinate;
-    return _.times(4, (increment) => ({row, column: column + increment}))
+    if (piece.rotation === 0) {
+        return _.times(4, (increment) => ({row: row + increment, column}));
+    }
+    return _.times(4, (increment) => ({row, column: column + increment}));
 }
 
 function isFilledForPiece(piece, row, column) {
@@ -22,9 +25,9 @@ function Board({board: {rows, columns}, pieces}) {
                 <div className={"row"} key={`row:${row}`}>
                     {_.times(columns, (column) => {
                         if (isFilled(pieces, row, column)) {
-                            return <div className={"cell filled"} role={"filled-cell"} key={`cell:${row},${column}`}/>
+                            return <div className={"cell filled"} role={"filled-cell"} key={`cell:${row},${column}`} data-row={row} data-column={column}/>
                         }
-                        return <div className={"cell"} role={"cell"} key={`cell:${row},${column}`}/>;
+                        return <div className={"cell"} role={"cell"} key={`cell:${row},${column}`} data-row={row} data-column={column}/>;
                     })}
                 </div>)
             }
