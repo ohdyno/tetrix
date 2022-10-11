@@ -15,7 +15,7 @@ function isFilledForPiece(piece, row, column) {
 }
 
 function isFilled(pieces, row, column) {
-    return _.some(pieces,piece => isFilledForPiece(piece, row, column))
+    return _.has(pieces, `${row}.${column}`)
 }
 
 function Board({board: {rows, columns}, pieces}) {
@@ -35,15 +35,14 @@ function Board({board: {rows, columns}, pieces}) {
     )
 }
 
-function App({board, pieces: pieces = [{
-    type: "line",
-    rotation: 90,
-    coordinate: {
-        row: 0,
-        column: 0
+function App({board, pieces: pieces = {
+    0: {
+        0: "line",
+        1: "line",
+        2: "line",
+        3: "line"
     }
-
-}]}) {
+}}) {
     return (
         <div className="App">
             <h1>Tetrix</h1>

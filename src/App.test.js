@@ -30,39 +30,21 @@ function containsCell(cells, row, column) {
 }
 
 describe('rendering pieces', function () {
-    it('renders a horizontal line piece at the top of the board', () => {
-        const piece = {
-            type: "line",
-            rotation: 90,
-            coordinate: {
-                row: 0,
-                column: 0
+    it('renders filled cells in the correct locations', () => {
+        const pieces = {
+            0: {
+                0: "line",
+                1: "line",
+                2: "line",
+                3: "line"
             }
-
         };
-        render(<App board={{rows: 4, columns: 4}} pieces={[piece]}/>);
+        render(<App board={{rows: 4, columns: 4}} pieces={pieces}/>);
         const cells = screen.getAllByRole(/filled-cell/i);
+        expect(cells.length).toEqual(4);
         expect(containsCell(cells, `0`, "0")).toBeTruthy()
         expect(containsCell(cells, "0", "1")).toBeTruthy()
         expect(containsCell(cells, "0", "2")).toBeTruthy()
         expect(containsCell(cells, "0", "3")).toBeTruthy()
-    });
-
-    it('renders a vertical line piece at the top of the board', () => {
-        const piece = {
-            type: "line",
-            rotation: 0,
-            coordinate: {
-                row: 0,
-                column: 0
-            }
-
-        };
-        render(<App board={{rows: 4, columns: 4}} pieces={[piece]}/>);
-        const cells = screen.getAllByRole(/filled-cell/i);
-        expect(containsCell(cells, "0", "0")).toBeTruthy()
-        expect(containsCell(cells, "1", "0")).toBeTruthy()
-        expect(containsCell(cells, "2", "0")).toBeTruthy()
-        expect(containsCell(cells, "3", "0")).toBeTruthy()
     });
 });
